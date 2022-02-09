@@ -21,6 +21,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+    //Categoria
     Route::get('/dashboard',[CategoriasController::class, 'index'])->name('dashboard');
     
 
@@ -33,7 +34,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
     //Personas 
     Route::get('/dashboardPersona',[PersonasController::class, 'index'])->name('dashboardPersona');
-    Route::get('/addPersona',[PersonasController::class, 'add']);
+    
+    Route::get('/persona',[PersonasController::class, 'add']);
     Route::post('/persona',[PersonasController::class, 'create']);
 
     Route::get('/persona/{persona}', [PersonasController::class, 'edit']);

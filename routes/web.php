@@ -32,10 +32,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
 
     //Personas 
-    Route::get('/persona',[PersonasController::class, 'index'])->name('persona');
+    Route::get('/dashboardPersona',[PersonasController::class, 'index'])->name('dashboardPersona');
     Route::get('/addPersona',[PersonasController::class, 'add']);
-    /*Route::post('/persona',[PersonasController::class, 'create']);
+    Route::post('/persona',[PersonasController::class, 'create']);
 
-    Route::get('/persona/{persona}', [PersonasController::class, 'edit']);
+    /*Route::get('/persona/{persona}', [PersonasController::class, 'edit']);
     Route::post('/persona/{persona}', [PersonasController::class, 'update']);*/
 });

@@ -36,6 +36,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/addPersona',[PersonasController::class, 'add']);
     Route::post('/persona',[PersonasController::class, 'create']);
 
-    /*Route::get('/persona/{persona}', [PersonasController::class, 'edit']);
-    Route::post('/persona/{persona}', [PersonasController::class, 'update']);*/
+    Route::get('/persona/{persona}', [PersonasController::class, 'edit']);
+    Route::post('/persona/{persona}', [PersonasController::class, 'update']);
 });

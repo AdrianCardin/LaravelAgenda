@@ -30,7 +30,7 @@ class PersonasController extends Controller
     	$persona->user_id = auth()->user()->id;
         $persona->categoria_id = auth()->user()->categoria_id;
     	$persona->save();
-    	return redirect('/persona'); 
+    	return redirect('/dashboardPersona'); 
     }
 
     public function edit(Persona $persona)
@@ -41,7 +41,7 @@ class PersonasController extends Controller
                 return view('editPersona', compact('persona'));
         }           
         else {
-             return redirect('/persona');
+             return redirect('/dashboardPersona');
          }            	
     }
 
@@ -49,7 +49,7 @@ class PersonasController extends Controller
     {
     	if(isset($_POST['delete'])) {
     		$persona->delete();
-    		return redirect('/persona');
+    		return redirect('/dashboardPersona');
     	}
     	else
     	{
@@ -62,7 +62,7 @@ class PersonasController extends Controller
     	    $persona->user_id = auth()->user()->id;
             $persona->categoria_id = auth()->user()->categoria_id;
 	    	$persona->save();
-	    	return redirect('/persona'); 
+	    	return redirect('/dashboardPersona'); 
     	}    	
     }
     

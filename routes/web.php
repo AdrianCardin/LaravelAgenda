@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\PersonasController;
 
 
 /*
@@ -27,4 +28,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
     Route::get('/categoria/{categoria}', [CategoriasController::class, 'edit']);
     Route::post('/categoria/{categoria}', [CategoriasController::class, 'update']);
+
+
+    //Personas 
+    Route::get('/persona',[PersonasController::class, 'add']);
+    Route::post('/persona',[PersonasController::class, 'create']);
+
+    Route::get('/persona/{categoria}', [PersonasController::class, 'edit']);
+    Route::post('/persona/{categoria}', [PersonasController::class, 'update']);
 });

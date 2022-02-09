@@ -10,12 +10,12 @@ class PersonasController extends Controller
     public function index()
     {
         $personas = auth()->user()->personas();
-        return view('dashboard', compact('personas'));
+        return view('dashboardPersona', compact('personas'));
         
     }
     public function add()
     {
-    	return view('add');
+    	return view('addPersona');
     }
 
     public function create(Request $request)
@@ -28,6 +28,7 @@ class PersonasController extends Controller
         $persona->telefono = $request->telefono;
         $persona->direccion = $request->direccion;
     	$persona->user_id = auth()->user()->id;
+        $persona->categoria_id = auth()->user()->categoria_id;
     	$persona->save();
     	return redirect('/persona'); 
     }
@@ -37,7 +38,7 @@ class PersonasController extends Controller
 
     	if (auth()->user()->id == $persona->user_id)
         {            
-                return view('edit', compact('persona'));
+                return view('editPersona', compact('persona'));
         }           
         else {
              return redirect('/persona');
@@ -56,6 +57,10 @@ class PersonasController extends Controller
                 'nombre' => 'required'
             ]);
     		$persona->nombre = $request->nombre;
+            $persona->telefono = $request->telefono;
+            $persona->direccion = $request->direccion;
+    	    $persona->user_id = auth()->user()->id;
+            $persona->categoria_id = auth()->user()->categoria_id;
 	    	$persona->save();
 	    	return redirect('/persona'); 
     	}    	

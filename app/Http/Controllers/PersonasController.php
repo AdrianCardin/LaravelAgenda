@@ -10,7 +10,8 @@ class PersonasController extends Controller
     public function index()
     {
         $personas = auth()->user()->personas();
-        return view('persona', compact('personas'));
+        return view('dashboard', compact('personas'));
+        
     }
     public function add()
     {
@@ -59,4 +60,5 @@ class PersonasController extends Controller
 	    	return redirect('/persona'); 
     	}    	
     }
+    
 }

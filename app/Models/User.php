@@ -10,6 +10,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Categoria;
+use App\Models\Persona;
 
 class User extends Authenticatable
 {
@@ -63,5 +64,9 @@ class User extends Authenticatable
     public function categorias()
     {
         return $this->hasMany(Categoria::class);
+    }
+    public function personas()
+    {
+        return $this->hasMany(Persona::class);
     }
 }

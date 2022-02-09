@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/dashboard',[CategoriasController::class, 'index'])->name('dashboard');
-    //Route::get('/dashboard',[PersonasController::class, 'index'])->name('persona');
+    Route::get('/persona',[PersonasController::class, 'index'])->name('persona');
 
     Route::get('/categoria',[CategoriasController::class, 'add']);
     Route::post('/categoria',[CategoriasController::class, 'create']);
@@ -32,8 +32,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
 
     //Personas 
-    /*Route::get('/dashboard',[PersonasController::class, 'index'])->name('dashboard');
-
+    /*
     Route::get('/persona',[PersonasController::class, 'add']);
     Route::post('/persona',[PersonasController::class, 'create']);
 

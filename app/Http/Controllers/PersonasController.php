@@ -27,8 +27,8 @@ class PersonasController extends Controller
     	$persona->nombre = $request->nombre;
         $persona->telefono = $request->telefono;
         $persona->direccion = $request->direccion;
+        $persona->categoria_id = $request->categoria_id;
     	$persona->user_id = auth()->user()->id;
-        //$persona->categoria_id = auth()->user()->categoria_id;
     	$persona->save();
     	return redirect('/dashboardPersona'); 
     }

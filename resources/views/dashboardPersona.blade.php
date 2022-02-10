@@ -20,7 +20,10 @@
                     <thead>
                     <tr class="border-b">
                         <th class="text-left p-3 px-5">Persona</th>
-                        <th class="text-left p-3 px-5">Actions</th>
+                        <th class="text-left p-3 px-5">Telefono</th>
+                        <th class="text-left p-3 px-5">Direccion</th>
+                        <th class="text-left p-3 px-5">Categoria</th>
+                        <th class="text-left p-3 px-5">Administrar</th>
                         <th></th>
                     </tr>
                     </thead>

@@ -22,22 +22,19 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     //Categoria
-    Route::get('/dashboard',[CategoriasController::class, 'index'])->name('dashboard');
+    Route::get  ('/dashboard',              [CategoriasController::class, 'index'])->name('dashboard');
     
-
-    Route::get('/categoria',[CategoriasController::class, 'add']);
-    Route::post('/categoria',[CategoriasController::class, 'create']);
-
-    Route::get('/categoria/{categoria}', [CategoriasController::class, 'edit']);
-    Route::post('/categoria/{categoria}', [CategoriasController::class, 'update']);
+    Route::get  ('/categoria',              [CategoriasController::class, 'add']);
+    Route::post ('/categoria',              [CategoriasController::class, 'create']);
+    Route::get  ('/categoria/{categoria}',  [CategoriasController::class, 'edit']);
+    Route::post ('/categoria/{categoria}',  [CategoriasController::class, 'update']);
 
 
     //Personas 
-    Route::get('/dashboardPersona',[PersonasController::class, 'index'])->name('dashboardPersona');
+    Route::get  ('/dashboardPersona',       [PersonasController::class, 'index'])->name('dashboardPersona');
     
-    Route::get('/persona',[PersonasController::class, 'add']);
-    Route::post('/persona',[PersonasController::class, 'create']);
-
-    Route::get('/persona/{persona}', [PersonasController::class, 'edit']);
-    Route::post('/persona/{persona}', [PersonasController::class, 'update']);
+    Route::get  ('/persona',                [PersonasController::class, 'add']);
+    Route::post ('/persona',                [PersonasController::class, 'create']);
+    Route::get  ('/persona/{persona}',      [PersonasController::class, 'edit']);
+    Route::post ('/persona/{persona}',      [PersonasController::class, 'update']);
 });

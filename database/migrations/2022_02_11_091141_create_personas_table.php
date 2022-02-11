@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('telefono');
             $table->string('direccion');
+            $table->string('categoria');
             $table->foreignId('user_id');
             $table->timestamps();
         });

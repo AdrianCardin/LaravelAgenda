@@ -13,7 +13,7 @@
                     <div class="flex-auto text-2xl mb-4">Persona</div>
 
                     <div class="flex-auto text-right mt-2">
-                        <a href="/persona" class="bg-blue-500 hover:bg-blue-700  font-bold py-2 px-4 rounded">Add new Persona</a>
+                        <a href="/addPersona" class="bg-blue-500 hover:bg-blue-700  font-bold py-2 px-4 rounded">Add new Persona</a>
                     </div>
                 </div>
                 <table class="w-full text-md rounded mb-4">
@@ -22,8 +22,7 @@
                         <th class="text-left p-3 px-5">Persona</th>
                         <th class="text-left p-3 px-5">Telefono</th>
                         <th class="text-left p-3 px-5">Direccion</th>
-                        <th class="text-left p-3 px-5">Categoria</th>
-                        <th class="text-left p-3 px-5">Administrar</th>
+                        <th class="text-left p-3 px-5">Actions</th>
                         <th></th>
                     </tr>
                     </thead>

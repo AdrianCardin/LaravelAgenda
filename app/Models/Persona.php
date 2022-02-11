@@ -13,8 +13,4 @@ class Persona extends Model
     {
     	return $this->belongsTo(User::class);
     }
-    public function categoria()
-    {
-    	return $this->belongsTo(User::class);
-    }
 }

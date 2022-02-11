@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-use App\Models\Persona;
 
 class Categoria extends Model
 {
@@ -14,9 +13,5 @@ class Categoria extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-    public function personas()
-    {
-        return $this->hasMany(Persona::class);
     }
 }

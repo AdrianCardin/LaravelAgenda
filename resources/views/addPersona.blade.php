@@ -29,12 +29,6 @@
                             <span class="text-danger">{{ $errors->first('direccion') }}</span>
                         @endif
                     </div>
-                    <div class="form-group">
-                        <textarea name="categoria_id" class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"  placeholder='Enter your categoria_id'></textarea>  
-                        @if ($errors->has('categoria_id'))
-                            <span class="text-danger">{{ $errors->first('categoria_id') }}</span>
-                        @endif
-                    </div>
     
                     <div class="form-group">
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700  font-bold py-2 px-4 rounded">Add Persona</button>

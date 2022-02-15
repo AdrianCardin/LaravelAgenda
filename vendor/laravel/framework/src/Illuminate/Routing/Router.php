@@ -541,7 +541,7 @@ class Router implements BindingRegistrar, RegistrarContract
     {
         $group = end($this->groupStack);
 
-        return isset($group['namespace']) && ! str_starts_with($class, '\\')
+        return isset($group['namespace']) && strpos($class, '\\') !== 0
                 ? $group['namespace'].'\\'.$class : $class;
     }
 
@@ -563,7 +563,7 @@ class Router implements BindingRegistrar, RegistrarContract
             return $class;
         }
 
-        if (str_contains($class, '@')) {
+        if (strpos($class, '@') !== false) {
             return $class;
         }
 
@@ -731,23 +731,13 @@ class Router implements BindingRegistrar, RegistrarContract
      */
     public function gatherRouteMiddleware(Route $route)
     {
-        return $this->resolveMiddleware($route->gatherMiddleware(), $route->excludedMiddleware());
-    }
+        $computedMiddleware = $route->gatherMiddleware();
 
-    /**
-     * Resolve a flat array of middleware classes from the provided array.
-     *
-     * @param  array  $middleware
-     * @param  array  $excluded
-     * @return array
-     */
-    public function resolveMiddleware(array $middleware, array $excluded = [])
-    {
-        $excluded = collect($excluded)->map(function ($name) {
+        $excluded = collect($route->excludedMiddleware())->map(function ($name) {
             return (array) MiddlewareNameResolver::resolve($name, $this->middleware, $this->middlewareGroups);
         })->flatten()->values()->all();
 
-        $middleware = collect($middleware)->map(function ($name) {
+        $middleware = collect($computedMiddleware)->map(function ($name) {
             return (array) MiddlewareNameResolver::resolve($name, $this->middleware, $this->middlewareGroups);
         })->flatten()->reject(function ($name) use ($excluded) {
             if (empty($excluded)) {
@@ -844,7 +834,6 @@ class Router implements BindingRegistrar, RegistrarContract
      * @return \Illuminate\Routing\Route
      *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \Illuminate\Routing\Exceptions\BackedEnumCaseNotFoundException
      */
     public function substituteBindings($route)
     {
@@ -858,13 +847,12 @@ class Router implements BindingRegistrar, RegistrarContract
     }
 
     /**
-     * Substitute the implicit route bindings for the given route.
+     * Substitute the implicit Eloquent model bindings for the route.
      *
      * @param  \Illuminate\Routing\Route  $route
      * @return void
      *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     * @throws \Illuminate\Routing\Exceptions\BackedEnumCaseNotFoundException
      */
     public function substituteImplicitBindings($route)
     {

@@ -682,7 +682,7 @@ class Blueprint
      */
     public function char($column, $length = null)
     {
-        $length = ! is_null($length) ? $length : Builder::$defaultStringLength;
+        $length = $length ?: Builder::$defaultStringLength;
 
         return $this->addColumn('char', $column, compact('length'));
     }
@@ -1216,7 +1216,7 @@ class Blueprint
      * @param  string  $column
      * @return \Illuminate\Database\Schema\ColumnDefinition
      */
-    public function uuid($column = 'uuid')
+    public function uuid($column)
     {
         return $this->addColumn('uuid', $column);
     }
@@ -1241,7 +1241,7 @@ class Blueprint
      * @param  string  $column
      * @return \Illuminate\Database\Schema\ColumnDefinition
      */
-    public function ipAddress($column = 'ip_address')
+    public function ipAddress($column)
     {
         return $this->addColumn('ipAddress', $column);
     }
@@ -1252,7 +1252,7 @@ class Blueprint
      * @param  string  $column
      * @return \Illuminate\Database\Schema\ColumnDefinition
      */
-    public function macAddress($column = 'mac_address')
+    public function macAddress($column)
     {
         return $this->addColumn('macAddress', $column);
     }

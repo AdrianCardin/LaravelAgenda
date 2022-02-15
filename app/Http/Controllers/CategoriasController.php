@@ -4,19 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+
 class CategoriasController extends Controller
 {
     public function index()
     {
         $categorias = auth()->user()->categorias();
-        return view('dashboard', compact('categorias'));
-    }
-    public function add()
-    {
-        return view('add');
+        return view('dashboardCategorias', compact('categorias'));
     }
 
-    public function create(Request $request)
+    public function añadir()
+    {
+        return view('añadirCategoria');
+    }
+
+    public function crear(Request $request)
     {
         $this->validate($request, [
             'nombre' => 'required'
@@ -24,36 +26,33 @@ class CategoriasController extends Controller
         $categoria = new Categoria();
         $categoria->nombre = $request->nombre;
         $categoria->user_id = auth()->user()->id;
+
         $categoria->save();
-        return redirect('/dashboard');
+        return redirect('/dashboardCategorias');
     }
 
-    public function edit(Categoria $categoria)
+    public function editar(Categoria $categoria)
     {
 
-        if (auth()->user()->id == $categoria->user_id)
-        {
-            return view('edit', compact('categoria'));
-        }
-        else {
-            return redirect('/dashboard');
+        if (auth()->user()->id == $categoria->user_id) {
+            return view('editarCategoria', compact('categoria'));
+        } else {
+            return redirect('/dashboardCategorias');
         }
     }
 
-    public function update(Request $request, Categoria $categoria)
+    public function actualizar(Request $request, Categoria $categoria)
     {
-        if(isset($_POST['delete'])) {
+        if (isset($_POST['eliminar'])) {
             $categoria->delete();
-            return redirect('/dashboard');
-        }
-        else
-        {
+            return redirect('/dashboardCategorias');
+        } else {
             $this->validate($request, [
                 'nombre' => 'required'
             ]);
             $categoria->nombre = $request->nombre;
             $categoria->save();
-            return redirect('/dashboard');
+            return redirect('/dashboardCategorias');
         }
     }
 }

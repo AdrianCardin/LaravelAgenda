@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\PersonasController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,25 +16,21 @@ use App\Http\Controllers\PersonasController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(url("/dashboardPersonas"));
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->group(function(){
-    Route::get('/dashboard',[CategoriasController::class, 'index'])->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->group(function() {
+    Route::get ('/dashboardCategorias',   [CategoriasController::class, 'index'     ])->name('dashboardCategorias');
+
+    Route::get ('/categoria',             [CategoriasController::class, 'añadir'    ]);
+    Route::post('/categoria',             [CategoriasController::class, 'crear'     ]);
+    Route::get ('/categoria/{categoria}', [CategoriasController::class, 'editar'    ]);
+    Route::post('/categoria/{categoria}', [CategoriasController::class, 'actualizar']);
+
+    Route::get ('/dashboardPersonas', [PersonasController::class, 'index'     ])->name('dashboardPersonas');
     
-
-    Route::get('/categoria',[CategoriasController::class, 'add']);
-    Route::post('/categoria',[CategoriasController::class, 'create']);
-
-    Route::get('/categoria/{categoria}', [CategoriasController::class, 'edit']);
-    Route::post('/categoria/{categoria}', [CategoriasController::class, 'update']);
-
-
-    //Personas 
-    Route::get('/dashboardPersona',[PersonasController::class, 'index'])->name('dashboardPersona');
-    Route::get('/addPersona',[PersonasController::class, 'add']);
-    Route::post('/persona',[PersonasController::class, 'create']);
-
-    Route::get('/persona/{persona}', [PersonasController::class, 'edit']);
-    Route::post('/persona/{persona}', [PersonasController::class, 'update']);
+    Route::get ('/persona',           [PersonasController::class, 'añadir'    ]);
+    Route::post('/persona',           [PersonasController::class, 'crear'     ]);
+    Route::get ('/persona/{persona}', [PersonasController::class, 'editar'    ]);
+    Route::post('/persona/{persona}', [PersonasController::class, 'actualizar']);
 });

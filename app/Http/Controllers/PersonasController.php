@@ -10,60 +10,79 @@ class PersonasController extends Controller
     public function index()
     {
         $personas = auth()->user()->personas();
-        return view('dashboardPersona', compact('personas'));
-        
-    }
-    public function add()
-    {
-    	return view('addPersona');
+        return view('dashboardPersonas', compact('personas'));
     }
 
-    public function create(Request $request)
+    public function añadir()
+    {
+        return view('añadirPersona');
+    }
+
+    public function crear(Request $request)
     {
         $this->validate($request, [
-            'nombre' => 'required'
+            'nombre' => 'required',
+            'apellidos' => 'required',
+            'telefono' => 'required',
+            'estrella' => 'required',
+            'categoria_id' => 'required'
         ]);
-    	$persona = new Persona();
-    	$persona->nombre = $request->nombre;
+
+        $persona = new Persona();
+        $persona->nombre = $request->nombre;
+        $persona->apellidos = $request->apellidos;
         $persona->telefono = $request->telefono;
-        $persona->direccion = $request->direccion;
-    	$persona->user_id = auth()->user()->id;
-        //$persona->categoria_id = auth()->user()->categoria_id;
-    	$persona->save();
-    	return redirect('/dashboardPersona'); 
+        $persona->estrella = $request->estrella;
+        $persona->categoria_id = $request->categoria_id;
+        $persona->user_id = auth()->user()->id;
+
+        $persona->save();
+        return redirect('/dashboardPersonas');
     }
 
-    public function edit(Persona $persona)
+    public function editar(Persona $persona)
     {
 
-    	if (auth()->user()->id == $persona->user_id)
-        {            
-                return view('editPersona', compact('persona'));
-        }           
-        else {
-             return redirect('/dashboardPersona');
-         }            	
+        if (auth()->user()->id == $persona->user_id) {
+            return view('editarPersona', compact('persona'));
+        } else {
+            return redirect('/dashboardPersonas');
+        }
     }
 
-    public function update(Request $request, Persona $persona)
+    public function actualizar(Request $request, Persona $persona)
     {
-    	if(isset($_POST['delete'])) {
-    		$persona->delete();
-    		return redirect('/dashboardPersona');
-    	}
-    	else
-    	{
+        
+        $estrella = $request->estrella==0  ? 0 : 1  ;
+        
+        if (isset($_POST['eliminar'])) {
+            
+            $persona->delete();
+            return redirect('/dashboardPersonas');
+
+        } else if(isset($_POST['clickEstrella'])) {
+
+            $persona->estrella = $persona->estrella ? 0 : 1 ;
+            $persona->save();
+
+            return redirect('/dashboardPersonas');
+        }else{
             $this->validate($request, [
-                'nombre' => 'required'
+                'nombre' => 'required',
+                'apellidos' => 'required',
+                'telefono' => 'required',
+                'estrella',
+                'categoria_id' => 'required'
             ]);
-    		$persona->nombre = $request->nombre;
+            $persona->nombre = $request->nombre;
+            $persona->apellidos = $request->apellidos;
             $persona->telefono = $request->telefono;
-            $persona->direccion = $request->direccion;
-    	    $persona->user_id = auth()->user()->id;
-            //$persona->categoria_id = auth()->user()->categoria_id;
-	    	$persona->save();
-	    	return redirect('/dashboardPersona'); 
-    	}    	
+            $persona->estrella = $estrella;
+            $persona->categoria_id = $request->categoria_id;
+            $persona->save();
+
+            return redirect('/dashboardPersonas');
+
+        }
     }
-    
 }

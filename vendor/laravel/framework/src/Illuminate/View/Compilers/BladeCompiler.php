@@ -3,9 +3,7 @@
 namespace Illuminate\View\Compilers;
 
 use Illuminate\Container\Container;
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\Factory as ViewFactory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\ReflectsClosures;
@@ -116,7 +114,7 @@ class BladeCompiler extends Compiler implements CompilerInterface
     protected $footer = [];
 
     /**
-     * Array to temporarily store the raw blocks found in the template.
+     * Array to temporary store the raw blocks found in the template.
      *
      * @var array
      */
@@ -241,7 +239,7 @@ class BladeCompiler extends Compiler implements CompilerInterface
         );
 
         foreach ($this->precompilers as $precompiler) {
-            $value = $precompiler($value);
+            $value = call_user_func($precompiler, $value);
         }
 
         // Here we will loop through all of the tokens returned by the Zend lexer and
@@ -309,30 +307,6 @@ class BladeCompiler extends Compiler implements CompilerInterface
     }
 
     /**
-     * Render a component instance to HTML.
-     *
-     * @param  \Illuminate\View\Component  $component
-     * @return string
-     */
-    public static function renderComponent(Component $component)
-    {
-        $data = $component->data();
-
-        $view = value($component->resolveView(), $data);
-
-        if ($view instanceof View) {
-            return $view->with($data)->render();
-        } elseif ($view instanceof Htmlable) {
-            return $view->toHtml();
-        } else {
-            return Container::getInstance()
-                ->make(ViewFactory::class)
-                ->make($view, $data)
-                ->render();
-        }
-    }
-
-    /**
      * Store the blocks that do not receive compilation.
      *
      * @param  string  $value
@@ -340,11 +314,11 @@ class BladeCompiler extends Compiler implements CompilerInterface
      */
     protected function storeUncompiledBlocks($value)
     {
-        if (str_contains($value, '@verbatim')) {
+        if (strpos($value, '@verbatim') !== false) {
             $value = $this->storeVerbatimBlocks($value);
         }
 
-        if (str_contains($value, '@php')) {
+        if (strpos($value, '@php') !== false) {
             $value = $this->storePhpBlocks($value);
         }
 
@@ -425,7 +399,7 @@ class BladeCompiler extends Compiler implements CompilerInterface
     }
 
     /**
-     * Get a placeholder to temporarily mark the position of raw blocks.
+     * Get a placeholder to temporary mark the position of raw blocks.
      *
      * @param  int|string  $replace
      * @return string
@@ -504,7 +478,7 @@ class BladeCompiler extends Compiler implements CompilerInterface
      */
     protected function compileStatement($match)
     {
-        if (str_contains($match[1], '@')) {
+        if (Str::contains($match[1], '@')) {
             $match[0] = isset($match[3]) ? $match[1].$match[3] : $match[1];
         } elseif (isset($this->customDirectives[$match[1]])) {
             $match[0] = $this->callCustomDirective($match[1], Arr::get($match, 3));
@@ -526,7 +500,7 @@ class BladeCompiler extends Compiler implements CompilerInterface
     {
         $value = $value ?? '';
 
-        if (str_starts_with($value, '(') && str_ends_with($value, ')')) {
+        if (Str::startsWith($value, '(') && Str::endsWith($value, ')')) {
             $value = Str::substr($value, 1, -1);
         }
 
@@ -625,12 +599,12 @@ class BladeCompiler extends Compiler implements CompilerInterface
      */
     public function component($class, $alias = null, $prefix = '')
     {
-        if (! is_null($alias) && str_contains($alias, '\\')) {
+        if (! is_null($alias) && Str::contains($alias, '\\')) {
             [$class, $alias] = [$alias, $class];
         }
 
         if (is_null($alias)) {
-            $alias = str_contains($class, '\\View\\Components\\')
+            $alias = Str::contains($class, '\\View\\Components\\')
                             ? collect(explode('\\', Str::after($class, '\\View\\Components\\')))->map(function ($segment) {
                                 return Str::kebab($segment);
                             })->implode(':')

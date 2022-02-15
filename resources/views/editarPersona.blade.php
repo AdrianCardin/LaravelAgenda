@@ -1,15 +1,15 @@
 <x-app-layout>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-5">
+    <div class="">
+        <div class="">
+            <div class="">
 
                 <form method="POST" action="/persona/{{ $persona->id }}">
 
                     <div class="form-group">
                         <label for="nombre" class="col-md-2 control-label">Nombre</label>
                         <textarea name="nombre"
-                                  class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white">{{$persona->nombre }}</textarea>
+                                  class=" border border-gray-400 leading-normal resize-none  h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white">{{$persona->nombre }}</textarea>
                         @if ($errors->has('nombre'))
                             <span class="text-danger">{{ $errors->first('nombre') }}</span>
                         @endif
@@ -18,7 +18,7 @@
                     <div class="form-group">
                         <label for="apellidos" class="col-md-2 control-label">Apellidos</label>
                         <textarea name="apellidos"
-                                  class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white">{{$persona->apellidos }}</textarea>
+                                  class="  border border-gray-400 leading-normal resize-none  h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white">{{$persona->apellidos }}</textarea>
                         @if ($errors->has('apellidos'))
                             <span class="text-danger">{{ $errors->first('apellidos') }}</span>
                         @endif
@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <label for="telefono" class="col-md-2 control-label">Teléfono</label>
                         <textarea name="telefono"
-                                  class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white">{{$persona->telefono }}</textarea>
+                                  class="  border border-gray-400 leading-normal resize-none  h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white">{{$persona->telefono }}</textarea>
                         @if ($errors->has('telefono'))
                             <span class="text-danger">{{ $errors->first('telefono') }}</span>
                         @endif
@@ -41,10 +41,10 @@
                         
                         @if ($persona->estrella==0)
                         <input type="checkbox" name="estrella"
-                                  class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none  py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"></input>
+                                  class="  border border-gray-400 leading-normal resize-none  py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"></input>
                         @else
                         <input type="checkbox" name="estrella" checked
-                                  class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none  py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"></input>
+                                  class="  border border-gray-400 leading-normal resize-none  py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"></input>
                         @endif
 
                         
@@ -53,7 +53,7 @@
                     <div class="form-group">
                         <label for="categoria_id" class="col-md-2 control-label">Categoría</label>
                         <select name='categoria_id'
-                                class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white">
+                                class="  border border-gray-400 leading-normal resize-none  h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white">
                             @foreach (auth()->user()->categorias as $categoria)
                                 @php $seleccion = ""; @endphp
                                 @if ($categoria->id == $persona->categoria_id)
@@ -72,7 +72,7 @@
 
                     <div class="form-group">
                         <button type="submit" name="actualizar"
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Actualizar
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ">Actualizar
                             contacto
                         </button>
                     </div>

@@ -1,15 +1,15 @@
 <x-app-layout>
     
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class=" overflow-hidden shadow-xl sm:rounded-lg p-5">
+    <div class="">
+        <div class="">
+            <div class="">
 
                 <form method="POST" action="/categoria">
 
-                    <div class="form-group">
+                    <div class="">
                         <textarea name="nombre"
-                                  class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"
+                                  class=""
                                   placeholder='Introduce categoria nueva'></textarea>
                         @if ($errors->has('nombre'))
                             <span class="text-danger">{{ $errors->first('nombre') }}</span>
@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white  font-bold py-2 px-4 rounded">Añadir
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white  font-bold py-2 px-4 ">Añadir
                             categoría
                         </button>
                     </div>
